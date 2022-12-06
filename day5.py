@@ -32,12 +32,9 @@ for line in data:
         move = line.split(' ')
         quant, source, dest = int(move[1]), int(move[3])-1, int(move[5])-1
         quant = min(quant, len(stacks[source]))
+        stacks[dest] = stacks[dest] + stacks[source][-quant:]
+        stacks[source] = stacks[source][:-quant]
 
-        tmp = []
-        for i in range(quant):
-            tmp.append(stacks[source].pop())
-        tmp.reverse()
-        stacks[dest] += tmp    
 
 tops = []
 for stack in stacks:
